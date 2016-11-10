@@ -20,9 +20,14 @@ var (
 )
 
 func Me() {
-	setCredentials()
-	parse(makeRequest())
-	ioutil.WriteFile(FileLocation, []byte(currentUser.APIToken), 0644)
+	currentUser.APIToken = savedToken()
+	if currentUser.APIToken == "" {
+		setCredentials()
+		parse(makeRequest())
+		ioutil.WriteFile(FileLocation, []byte(currentUser.APIToken), 0644)
+	}
+
+	fmt.Printf("token %s:", currentUser.APIToken)
 }
 
 func makeRequest() []byte {
@@ -46,6 +51,16 @@ func parse(body []byte) {
 	}
 
 	currentUser.APIToken = meResp.APIToken
+}
+
+func savedToken() string {
+	fileContents, err := ioutil.ReadFile(FileLocation)
+	if err != nil {
+		fmt.Println("no saved token")
+		return ""
+	}
+
+	return string(fileContents)
 }
 
 func setCredentials() {
