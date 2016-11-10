@@ -8,8 +8,8 @@ import (
 	"os"
 	u "os/user"
 
-	"github.com/ckxssy/clirescue/cmdutil"
-	"github.com/ckxssy/clirescue/user"
+	"github.com/daplho/clirescue/cmdutil"
+	"github.com/daplho/clirescue/user"
 )
 
 var (
