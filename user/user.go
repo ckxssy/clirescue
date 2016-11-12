@@ -1,5 +1,7 @@
 package user
 
+import "fmt"
+
 func New() *User {
 	return new(User)
 }
@@ -21,4 +23,12 @@ type User struct {
 func (u *User) Login(name, pass string) {
 	u.Username = name
 	u.Password = pass
+}
+
+func (u *User) Print() {
+	fmt.Printf("uname: %s\n", u.Username)
+	fmt.Printf("name: %s\n", u.Name)
+	fmt.Printf("email: %s\n", u.Email)
+	fmt.Printf("initials: %s\n", u.Initials)
+	fmt.Printf("time_zone: %v\n", u.Timezone)
 }
